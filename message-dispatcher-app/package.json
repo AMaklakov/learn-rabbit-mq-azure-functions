@@ -1,0 +1,20 @@
+{
+	"name": "message-receiver-app",
+	"version": "1.0.0",
+	"description": "Application for receiving messages form RabbitMQ",
+	"main": "server.js",
+	"license": "MIT",
+	"scripts": {
+		"prestart": "yarn",
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"amqplib": "^0.5.5",
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
+		"express": "^4.17.1"
+	},
+	"devDependencies": {
+		"prettier": "^1.19.1"
+	}
+}
