@@ -3,16 +3,17 @@ const { makeRequestToAzureFunction } = require('./request');
 
 const processMessage = (msg, callback) => {
 	const data = msg.content.toString();
+	const dataParsed = JSON.parse(data);
 
 	console.log(' [x] Received %s', data);
 
 	const onSuccess = res => {
 		console.log(`[AZURE]: ${res}`);
 
-		callback(res);
+		callback(dataParsed.email, res);
 	};
 
-	makeRequestToAzureFunction(data)
+	makeRequestToAzureFunction(dataParsed.msg)
 		.then(res => onSuccess(res))
 		.catch(err => console.log(err));
 };
