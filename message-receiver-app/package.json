@@ -2,14 +2,16 @@
 	"name": "message-receiver-app",
 	"version": "1.0.0",
 	"description": "Application for receiving messages form RabbitMQ",
-	"main": "server.js",
+	"main": "src/server.js",
 	"license": "MIT",
 	"scripts": {
 		"prestart": "yarn",
-		"start": "node server.js"
+		"start": "node src/server.js"
 	},
 	"dependencies": {
-		"amqplib": "^0.5.5"
+		"amqplib": "^0.5.5",
+		"node-cron": "^2.0.3",
+		"nodemailer": "^6.4.2"
 	},
 	"devDependencies": {
 		"prettier": "^1.19.1"
