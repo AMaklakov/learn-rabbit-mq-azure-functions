@@ -2,12 +2,14 @@ import React, { ChangeEventHandler, MouseEventHandler, useState } from 'react';
 import './App.css';
 import { sendMessageToServer } from './service';
 
-const QUEUE_NAME = 'RABBIT_MQ';
+const DEFAULT_EMAIL = 'ar.maklakov@gmail.com';
 
 const App: React.FC = () => {
 	const [text, changeText] = useState('');
+	const [email, changeEmail] = useState(DEFAULT_EMAIL);
 
-	const handleChange: ChangeEventHandler<HTMLTextAreaElement> = e => changeText(e?.target?.value);
+	const handleTextChange: ChangeEventHandler<HTMLTextAreaElement> = e => changeText(e?.target?.value);
+	const handleEmailChange: ChangeEventHandler<HTMLInputElement> = e => changeEmail(e?.target?.value);
 
 	const handleClick: MouseEventHandler<HTMLButtonElement> = e => {
 		if (!text) {
@@ -15,8 +17,11 @@ const App: React.FC = () => {
 			return;
 		}
 
-		sendMessageToServer(text)
-			.then(() => changeText(''))
+		sendMessageToServer(text, email)
+			.then(() => {
+				changeText('');
+				changeEmail(DEFAULT_EMAIL);
+			})
 			.then(() => alert('Successfully sent!'));
 	};
 
@@ -24,7 +29,12 @@ const App: React.FC = () => {
 		<div className="App">
 			<label>
 				Input your text here:
-				<textarea rows={3} onChange={handleChange} value={text}></textarea>
+				<textarea rows={3} onChange={handleTextChange} value={text}></textarea>
+			</label>
+
+			<label>
+				Email:
+				<input type="text" onChange={handleEmailChange} value={email} />
 			</label>
 
 			<button onClick={handleClick}>Send to RabbitMQ</button>

@@ -1,4 +1,4 @@
-export const sendMessageToServer = (msg: string) => {
+export const sendMessageToServer = (msg: string, email: string) => {
 	return fetch('http://localhost:3001/sendMessage', {
 		method: 'POST', // *GET, POST, PUT, DELETE
 		// mode: 'cors', // no-cors, cors, *same-origin
@@ -8,6 +8,6 @@ export const sendMessageToServer = (msg: string) => {
 			'Content-Type': 'application/json',
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
-		body: JSON.stringify({ msg }),
+		body: JSON.stringify({ msg, email }),
 	});
 };
