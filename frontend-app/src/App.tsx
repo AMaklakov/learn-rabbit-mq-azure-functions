@@ -15,7 +15,9 @@ const App: React.FC = () => {
 			return;
 		}
 
-		sendMessageToServer(text);
+		sendMessageToServer(text)
+			.then(() => changeText(''))
+			.then(() => alert('Successfully sent!'));
 	};
 
 	return (
